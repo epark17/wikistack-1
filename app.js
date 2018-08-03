@@ -13,19 +13,16 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use('/wiki', wikiRouter);
 
+app.use('/wiki', wikiRouter);
 
 app.get('/', (req, res, next) => {
   res.redirect('/wiki');
 })
 
-
-
 // app.get('/', (req, res, next) => {
 //   res.send(layout(''));
 // });
-
 
 const init = async () => {
   // await models.db.sync(); //same as below

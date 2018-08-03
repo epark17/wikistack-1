@@ -21,6 +21,7 @@ const Page = db.define('page', {
   }
 });
 
+
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
@@ -35,6 +36,13 @@ const User = db.define('user', {
   }
 });
 
+function generateSlug (title) {
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+}
+
+Page.beforeValidate(page => {
+  page.slug = generateSlug(page.title);
+});
 
 db.authenticate()
   .then(() => {
